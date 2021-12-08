@@ -28,8 +28,11 @@ Keyword - Class of Class, Type, Meta Class, Custom Meta Class
 https://wikidocs.net/21056
 - 클래스로 객체를 만들 듯 메타 클래스로 클래스를 만들 수 있다는 의미
 - 클래스 선언을 동적으로 할 수 있음
-- 메타 클래스
-  - 클래스
+- 동적으로 클래서에 멤버/함수를 추가
+  - java 처럼 class 가 고정이 아니라는 생각이 필요
+
+https://wikidocs.net/89
+- 여러가지 특수 메소드
 '''
 
 
@@ -48,12 +51,11 @@ print('Ex1 > ', type(obj1))
 print('Ex1 > ', obj1.__class__.__class__)
 print('Ex1 > ', obj1.__class__ is type(obj1))
 print('Ex1 > ', type.__class__)
-
+print('Ex1 > ', type.__mro__)
 print()
 
 # Ex2
 # type meta (Ex1 증명)
-
 # int, dict 선언
 n = 10
 d = {'a': 10, 'b': 20}

@@ -24,8 +24,9 @@ s1 = type('Sample1', (), {})
 
 print('Ex1 > ', s1)
 print('Ex1 > ', type(s1))
+print('Ex1 > ', s1.__class__)
 print('Ex1 > ', s1.__base__)
-print('Ex1 > ', s1.__dict__)
+print('Ex1 > ', s1.__dict__) # namespace
 
 print()
 
@@ -85,4 +86,5 @@ print('Ex2 >', s3.attr1)
 print('Ex2 >', s3.attr2)
 print('Ex2 >', s3.add(100, 200))
 print('Ex2 >', s3.mul(100, 20))
+print('Ex2 >', object.__class__)
 print()

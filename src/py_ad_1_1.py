@@ -32,7 +32,6 @@ Keyword - scope, global, nonlocal, locals, globals..
 ################# Ex1
 a = None
 print(a is not None and len(a) > 0)
-exit()
 
 a = 10  # Global variable
 
