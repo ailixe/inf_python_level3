@@ -15,9 +15,12 @@ Keyword - Type(name, base, dct), Dynamic metaclass
 
 # Ex1
 # type 동적 클래스 생성 예제
-
 # Name(이름), Bases(상속), Dct(속성,메소드)
-s1 = type('sample1', (), {})
+# 클래스를 만든것
+s1 = type('Sample1', (), {})
+# 아래와 동일
+# class Sample1():
+#     pass
 
 print('Ex1 > ', s1)
 print('Ex1 > ', type(s1))
@@ -26,15 +29,17 @@ print('Ex1 > ', s1.__dict__)
 
 print()
 
+
 # 동적 생성 + 상속
 class Parent1:
     pass
 
+
 s2 = type(
-        'Sample2', 
-        (Parent1,), 
-        dict(attr1=100, attr2='hi')
-    )
+    'Sample2',
+    (Parent1,),
+    dict(attr1=100, attr2='hi')
+)
 
 print('Ex1 > ', s2)
 print('Ex1 > ', type(s2))
@@ -44,18 +49,20 @@ print('Ex1 >', s2.attr1, s2.attr2)
 
 print()
 
+
 # Ex2
 # type 동적 클래스 생성 + 메소드
 
-class SampleEx:  
+class SampleEx:
     attr1 = 30
     attr2 = 100
-    
+
     def add(self, m, n):
         return m + n
 
     def mul(self, m, n):
         return m * n
+
 
 ex = SampleEx()
 
@@ -68,11 +75,11 @@ print()
 # SampleEx 클래스를 Type 으로 동적 생성
 
 s3 = type(
-        'Sample3', 
-        (object, ), # 생략 가능
-        dict(attr1=30, attr2=100, add=lambda x, y: x + y, mul=lambda x, y: x * y)
-        # {'attr1': 30, 'attr2': 100, 'add': lambda x, y: x + y, 'mul': lambda x, y: x * y}
-    )
+    'Sample3',
+    (object,),  # 생략 가능
+    dict(attr1=30, attr2=100, add=lambda x, y: x + y, mul=lambda x, y: x * y)
+    # {'attr1': 30, 'attr2': 100, 'add': lambda x, y: x + y, 'mul': lambda x, y: x * y}
+)
 
 print('Ex2 >', s3.attr1)
 print('Ex2 >', s3.attr2)
