@@ -15,49 +15,65 @@ Keyword - descriptor, set, get, del, property
 
 """
 
+
 # Ex1
 # 기본적인 Descriptor 예제
-class DescriptorEx1(object): 
-  
-    def __init__(self, name = 'Default'): 
-        self.name = name 
-  
-    def __get__(self, obj, objtype): 
-        return "Get method called. -> self : {}, obj : {}, objtype : {}, name : {}".format(self, obj, objtype, self.name) 
-  
-    def __set__(self, obj, name): 
-        print('Set method called.')
-        if isinstance(name, str): 
-            self.name = name 
-        else: 
-            raise TypeError("Name should be string") 
+class DescriptorEx1(object):
+
+    def __init__(self, name):
+        print(f"## __init__ called : {name}")
+        self.name = name
+
+    def __get__(self, obj, objtype):
+        result = "## Get method called. -> self : {}\n" \
+                 "obj : {}\n" \
+                 "objtype : {}\n" \
+                 "name : {} \n##".format(self, obj, objtype, self.name)
+        return result
+
+    def __set__(self, obj, name):
+        print('## Set method called.')
+        if isinstance(name, str):
+            self.name = name
+        else:
+            raise TypeError("Name should be string")
 
     def __delete__(self, obj):
-        print('Delete method called.')
+        print('## Delete method called.')
         self.name = None
 
 
-class Sample1(object): 
-    name = DescriptorEx1() 
+class Sample1(object):
+    sample1_name = DescriptorEx1("param name")
 
-s1 = Sample1() 
 
-# __set__ 호출 
-s1.name = "Descriptor Test1"
+# print()
+# print(Sample1.sample1_name)
+# print(type(Sample1.sample1_name))
+# print()
+# Sample1.sample1_name = "asdf"
+# print(Sample1.sample1_name)
+# print(type(Sample1.sample1_name))
+
+s1 = Sample1()
+
+# __set__ 호출
+s1.sample1_name = "Descriptor Test1"
+# exit()
 
 # 예외 발생
-# s1.name = 7
+# s1.sample1_name = 7
 
 # attr 확인
 # __get__ 호출
-print('Ex1 > ', s1.name)
+print('Ex1 > ', s1.sample1_name)
 
 # __delete__ 호출
-del s1.name
+del s1.sample1_name
 
 # 재확인
 # __get__ 호출
-print('Ex1 > ', s1.name)
+print('Ex1 > ', s1.sample1_name)
 
 print()
 print()
@@ -67,34 +83,35 @@ print()
 # Property 클래스 사용 Descriptor 직접 구현
 # class property(fget=None, fset=None, fdel=None, doc=None)
 
-class DescriptorEx2(object): 
-  
-    def __init__(self, value): 
-        self._name = value 
-  
-    def getVal(self): 
-        return "Get method called. -> self : {}, name : {}".format(self, self._name) 
-  
-    def setVal(self, value): 
+class DescriptorEx2(object):
+
+    def __init__(self, value):
+        self._name = value
+
+    def getVal(self):
+        return "Get method called. -> self : {}, name : {}".format(self, self._name)
+
+    def setVal(self, value):
         print('Set method called.')
-        if isinstance(value, str): 
+        if isinstance(value, str):
             self._name = value
-        else: 
-            raise TypeError("Name should be string") 
+        else:
+            raise TypeError("Name should be string")
 
     def delVal(self):
         print('Delete method called.')
         self._name = None
 
-    name = property(getVal, setVal, delVal, 'Property Method Example.')  
+    name = property(getVal, setVal, delVal, 'Property Method Example.')
 
 
-s2 = DescriptorEx2('Descriptor Test2') 
+# s2 = DescriptorEx2('Descriptor Test2')
+s2 = DescriptorEx2("TT")
 
 # 최초 값 확인
 print('Ex2 > ', s2.name)
 
-# setVal 호출 
+# setVal 호출
 s2.name = "Descriptor Test2 Modified."
 
 # 예외 발생

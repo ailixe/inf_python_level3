@@ -19,21 +19,26 @@ Keyword - descriptor vs property, low level(descriptor) vs high level(property)
 
 import os
 
+
 class DirectoryFileCount:
     def __get__(self, obj, objtype=None):
         # print(os.listdir(obj.dirname))
         return len(os.listdir(obj.dirname))
 
+
 class DirectoryPath:
     # Descriptor instance
-    size = DirectoryFileCount()             
+    size = DirectoryFileCount()
+
     # Regular instance attribute
     def __init__(self, dirname):
-        self.dirname = dirname          
+        self.dirname = dirname
 
-# 현재 경로
+    # 현재 경로
+
+
 s = DirectoryPath('./')
-# 이전 경로 
+# 이전 경로
 g = DirectoryPath('../')
 
 # 헷갈릴때 출력 용도
@@ -57,6 +62,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
+
 class LoggedScoreAccess:
 
     def __init__(self, value=60):
@@ -70,13 +76,14 @@ class LoggedScoreAccess:
         logging.info('Updating %r to %r', 'score', self.value)
         self.value = value
 
+
 class Student:
     # Descriptor instance
-    score = LoggedScoreAccess()             
 
     def __init__(self, name):
         # Regular instance attribute
-        self.name = name                  
+        self.name = name
+        self.score = LoggedScoreAccess()
 
 
 s1 = Student('Kim')
@@ -84,8 +91,9 @@ s2 = Student('Lee')
 
 # 점수 확인(s1)
 print('Ex2 > ', s1.score)
-s1.score += 10
+s1.score = 10
 print('Ex2 > ', s1.score)
+exit()
 
 # 점수 확인(s2)
 print('Ex2 > ', s2.score)
